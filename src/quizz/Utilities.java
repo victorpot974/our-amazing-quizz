@@ -2,6 +2,7 @@ package quizz;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Utilities {
 	
@@ -44,6 +45,42 @@ public class Utilities {
 	
 	public static String generateSimpleRegex(String possibleChars) {
 		return "^[" + possibleChars + "]$";
+	}
+	
+	public static boolean containsRegexPattern(String testedString, String regex) {
+		Pattern pattern = Pattern.compile(regex);
+		return pattern.matcher(testedString).find();
+	}
+	
+	public static boolean securePasswordCheck(String password) {
+		String digits = "^.*[0-9]{1,}.*$";
+		String upperCase = "^.*[A-Z]{1,}.*$";
+		String lowerCase = "^.*[a-z]{1,}.*$";
+		String specialChars = "^.*[^a-zA-Z0-9]{1,}.*$";
+		
+		if (password.length() < 8) {
+			return false;
+		}
+		if (!containsRegexPattern(password, digits)) {
+			System.out.println("no digits found");
+			return false;
+		}
+		
+		if (!containsRegexPattern(password, upperCase)) {
+			System.out.println("no upper case found");
+			return false;
+		}
+		
+		if (!containsRegexPattern(password, lowerCase)) {
+			System.out.println("no lower case found");
+			return false;
+		}
+		
+		if (!containsRegexPattern(password, specialChars)) {
+			System.out.println("no special char found");
+			return false;
+		}
+		return true;
 	}
 	
 }

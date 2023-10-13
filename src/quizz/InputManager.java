@@ -32,6 +32,7 @@ public class InputManager {
 		
 		while(!matcher.find()) {
 			OutputManager.invalidInputWarning(userInput, Utilities.readSimpleRegex(regex));
+			OutputManager.loginInstructions();
 			userInput = readString();
 			matcher = pattern.matcher(userInput);
 		}

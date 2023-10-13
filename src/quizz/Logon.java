@@ -22,11 +22,12 @@ public class Logon {
 		// TODO Auto-generated constructor stub
 		this.accountsPath = Utilities.ACCOUNTS_PATH;
 		this.readAccounts();
+		OutputManager.welcomeMessage();
 		
 	}
 	
 	public void chooseLoginMethod() {
-		OutputManager.welcomeInstructions();
+		OutputManager.loginInstructions();
 		String chosenOption = InputManager.readFilteredString(CHOOSE_LOGIN_REGEX);
 		switch (chosenOption) {
 		case "1":
@@ -67,7 +68,7 @@ public class Logon {
 		OutputManager.jumpLine();
 		Account foundAccount = this.matchAccount(username, password);
 		if (foundAccount == null) {
-			askLogin();
+			this.chooseLoginMethod();
 		}
 		else {
 			this.signIn(foundAccount);
@@ -80,19 +81,43 @@ public class Logon {
 	}
 	
 	public void guestSignIn() {
+		OutputManager.jumpLine();
 		this.signIn(Account.guest());
 	}
 	
+	
 	public void signUp() {
 		OutputManager.signUpInstructions();
+		
 		OutputManager.enterUsername();
 		String username = InputManager.readString();
+		
 		OutputManager.enterPassword();
 		String password = InputManager.readString();
-		OutputManager.jumpLine();
-		Account newAccount = this.createAccount(username, password);
-		OutputManager.successfulSignUp(username);
-		this.signIn(newAccount);
+		
+		if (Utilities.securePasswordCheck(password)) {
+			
+			OutputManager.confirmPassword();
+			String passwordConfirm = InputManager.readString();
+			
+			if (passwordConfirm.equals(password)) {
+				Account newAccount = this.createAccount(username, password);
+				OutputManager.successfulSignUp(username);
+				this.signIn(newAccount);
+			}
+			else {
+				OutputManager.confirmPasswordWarning();
+				this.chooseLoginMethod();
+			}
+		}
+		else {
+			OutputManager.invalidPasswordFormatWarning();
+			this.chooseLoginMethod();
+		}
+	}
+	
+	public Account getLoggedAccount() {
+		return this.loggedAccount;
 	}
 	
 	public Account matchAccount(String username, String password) {

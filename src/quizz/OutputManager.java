@@ -16,19 +16,18 @@ public class OutputManager {
 		}
 	}
 	
-	public static void welcomeInstructions() {
+	public static void welcomeMessage() {
 		displaySeparator();
 		System.out.println(String.format("Welcome to %s!", APP_TITLE));
 		jumpLine();
 		System.out.println("Proposed by KISS Solutions Inc");
 		displaySeparator();
-		jumpLines(2);
-
-		loginInstructions();
+		jumpLine();
 	}
 	
 	
 	public static void loginInstructions() {
+		jumpLine();
 		System.out.println("Enter 1 to log in to your account.");
 		System.out.println("Enter 2 to sign up and create an account.");
 		System.out.println("Or enter 3 to sign in as guest.");
@@ -47,17 +46,27 @@ public class OutputManager {
 		displaySeparator();
 		System.out.println("To create an account, please enter an username and a password.");
 		jumpLine();
+		passwordInstructions();
+		displaySeparator();
+		jumpLine();
+	}
+	
+	public static void passwordInstructions() {
 		System.out.println("Please note that your password must:");
 		System.out.println("\t- Be at least 8 characters long");
 		System.out.println("\t- Contain at least one digit");
 		System.out.println("\t- Contain at least one upper case letter");
 		System.out.println("\t- Contain at least one lower case letter");
 		System.out.println("\t- Contain at least one special character");
-		displaySeparator();
+	}
+	
+	public static void invalidPasswordFormatWarning() {
 		jumpLine();
+		System.out.println("Password is not strong enough! Please choose another password.");
 	}
 	
 	public static void successfulSignUp(String username) {
+		jumpLine();
 		System.out.println("Account creation successful!");
 	}
 	
@@ -78,6 +87,11 @@ public class OutputManager {
 	
 	public static void confirmPassword() {
 		System.out.print("Confirm password: ");
+	}
+	
+	public static void confirmPasswordWarning() {
+		jumpLine();
+		System.out.println("Error: passwords do not match! Please try again.");
 	}
 	
 	public static void invalidInputWarning(String invalidInput, String expectedInputs) {
