@@ -7,7 +7,7 @@ public class QuizBank {
 			"What's the name of the no.1 supercomputer in the world?",
 			"Combining two or more propositions using logical expressions is a:",
 			"What is a BDD?",
-			"Which of those is NOT a subset of {x ∈ N|x ∉ N}?",
+			"Which of those is NOT a subset of {x ∈ N|√x ∉ N}?",
 			"What is the equivalent of the decimal number 357 in base 2?",
 			
 			//Medium
