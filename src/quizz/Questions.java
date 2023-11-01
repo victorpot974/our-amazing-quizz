@@ -1,3 +1,5 @@
+// Author: Dawid Jabuwoski
+
 package quizz;
 
 import java.util.Scanner;

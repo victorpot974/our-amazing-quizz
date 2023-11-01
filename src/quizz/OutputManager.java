@@ -1,8 +1,15 @@
+// Author: Victor Pottier
+// CLI Interface for the logon
+
 package quizz;
 
+/**
+ * Manages the command line UI by printing various instructions.
+ */
 public class OutputManager {
 	
 	private static final String APP_TITLE = "The EPIC Quizz";
+	
 	private static final String DEFAULT_SEPARATOR_CHAR = "-";
 	private static final int DEFAULT_SEPARATOR_LENGTH = 150;
 	
@@ -41,6 +48,13 @@ public class OutputManager {
 		enterUsername();
 	}
 	
+	public static void accountAlreadyExistsWarning() {
+		jumpLine();
+		displaySeparator();
+		System.out.println("Failed to create account: an account associated to that username already exists. Please choose another username.");
+		displaySeparator();
+	}
+	
 	public static void signUpInstructions() {
 		jumpLine();
 		displaySeparator();
@@ -62,7 +76,9 @@ public class OutputManager {
 	
 	public static void invalidPasswordFormatWarning() {
 		jumpLine();
-		System.out.println("Password is not strong enough! Please choose another password.");
+		displaySeparator();
+		System.out.println("Failed to create account: password is not strong enough. Please choose another password.");
+		displaySeparator();
 	}
 	
 	public static void successfulSignUp(String username) {
@@ -73,7 +89,6 @@ public class OutputManager {
 	public static void wrongLoginWarning() {
 		displaySeparator();
 		System.out.println("Failed to log in: wrong username or password");
-		System.out.println("Enter 1 to try again or 2 to create an account.");
 		displaySeparator();
 	}
 	
@@ -91,7 +106,9 @@ public class OutputManager {
 	
 	public static void confirmPasswordWarning() {
 		jumpLine();
-		System.out.println("Error: passwords do not match! Please try again.");
+		displaySeparator();
+		System.out.println("Failed to create account: passwords do not match. Please try again.");
+		displaySeparator();
 	}
 	
 	public static void invalidInputWarning(String invalidInput, String expectedInputs) {
@@ -114,6 +131,9 @@ public class OutputManager {
 		jumpLine();
 	}
 	
+	/**
+	 * Repeatedly prints a separator character to clearly distinguish different paragraphs
+	 */
 	public static void displaySeparator() {
 		repeatPrint(DEFAULT_SEPARATOR_CHAR, DEFAULT_SEPARATOR_LENGTH);
 	}
